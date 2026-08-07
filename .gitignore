@@ -1,0 +1,25 @@
+# Not part of the Tequitla project (separate reference repo / local tooling)
+awesome-design-md/
+.agents/
+.claude/
+
+# Dependencies
+node_modules/
+
+# Build output
+.next/
+out/
+build/
+
+# Environment files (never commit secrets)
+.env
+.env.local
+.env.*.local
+
+# Local uploads (dev-only fallback; production uses Cloudinary)
+server/uploads/
+
+# Misc
+.DS_Store
+*.log
+npm-debug.log*
