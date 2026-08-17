@@ -15,14 +15,14 @@ export default function Pagination({ pathname, searchParams, pagination }) {
   );
 
   return (
-    <nav className="mt-8 flex items-center justify-center gap-2">
+    <nav className="mt-10 flex items-center justify-center gap-2">
       {pages.map((p, idx) => (
         <span key={p} className="flex items-center gap-2">
-          {idx > 0 && pages[idx - 1] !== p - 1 && <span className="text-neutral-400">…</span>}
+          {idx > 0 && pages[idx - 1] !== p - 1 && <span className="text-neutral-400">...</span>}
           <Link
             href={hrefFor(p)}
-            className={`flex h-9 w-9 items-center justify-center rounded-full text-sm ${
-              p === page ? "bg-black text-white" : "border border-neutral-300 hover:border-black"
+            className={`motion-surface motion-press flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold ${
+              p === page ? "bg-black text-white" : "border border-[#111111]/15 hover:border-black"
             }`}
           >
             {p}

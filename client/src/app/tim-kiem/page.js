@@ -16,16 +16,26 @@ export default async function SearchPage({ searchParams }) {
     : { products: [], pagination: { page: 1, totalPages: 0, total: 0 } };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <h1 className="text-2xl font-bold">Kết quả tìm kiếm cho &quot;{q}&quot;</h1>
-      <p className="mt-1 text-sm text-neutral-500">{pagination.total} sản phẩm</p>
+    <div className="mx-auto max-w-[1700px] px-5 py-10 sm:px-8">
+      <p className="mb-3 text-xs font-semibold uppercase text-[#707072]">Tìm kiếm</p>
+      <div className="flex flex-wrap items-end justify-between gap-5 border-b border-[#111111]/10 pb-8">
+        <div>
+          <h1 className="text-[34px] font-semibold uppercase leading-none text-[#111111] sm:text-[56px]">
+            Kết quả cho &quot;{q}&quot;
+          </h1>
+          <p className="mt-3 text-sm font-medium text-[#707072]">{pagination.total} sản phẩm</p>
+        </div>
+        <p className="max-w-md text-sm leading-6 text-[#707072]">
+          Gợi ý được lọc theo từ khóa, giới tính và độ mới để bạn tìm nhanh hơn.
+        </p>
+      </div>
 
       {products.length === 0 ? (
         <p className="py-16 text-center text-neutral-500">
           Không tìm thấy sản phẩm phù hợp với từ khóa của bạn.
         </p>
       ) : (
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-4 xl:grid-cols-5">
           {products.map((product, idx) => (
             <ProductCard key={product._id} product={product} priority={idx < 4} />
           ))}

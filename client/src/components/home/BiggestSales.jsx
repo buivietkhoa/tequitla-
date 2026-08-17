@@ -33,12 +33,12 @@ function SaleCard({ product, revealDelay = 0 }) {
   return (
     <Link
       href={`/san-pham/${product.slug}`}
-      className="group block w-[66vw] shrink-0 snap-start bg-[#111111] p-2 text-white sm:w-[250px] lg:w-[292px]"
+      className="group block w-[66vw] shrink-0 snap-start text-white sm:w-[250px] lg:w-[292px]"
       data-aos="fade-up"
       data-aos-delay={String(revealDelay)}
       data-aos-duration="800"
     >
-      <div className="product-hover-shell relative aspect-[4/5] w-full overflow-hidden bg-[#f5f5f5]">
+      <div className="product-hover-shell relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-[#f5f5f5]">
         <Image
           src={imageSrc}
           alt={product.name}
@@ -52,9 +52,9 @@ function SaleCard({ product, revealDelay = 0 }) {
           Xem nhanh
         </span>
       </div>
-      <div className="px-2 pb-2 pt-4 text-left text-sm text-white">
-        {product.brand && <p className="truncate font-semibold">{product.brand}</p>}
-        <p className="truncate text-white/60">{product.name}</p>
+      <div className="px-1 pb-2 pt-4 text-left text-sm text-white">
+        {product.brand && <p className="truncate text-xs font-semibold uppercase text-white/50">{product.brand}</p>}
+        <p className="mt-1 truncate text-[15px] font-semibold text-white">{product.name}</p>
         <div className="mt-2 flex flex-wrap items-center gap-2">
           <span className="font-semibold text-white">{formatCurrency(price)}</span>
           <span className="text-xs text-white/45 line-through">
@@ -92,10 +92,10 @@ export default function BiggestSales({ womenProducts = [], menProducts = [] }) {
 
   return (
     <section className="mx-auto mt-14 max-w-[1700px] px-5 sm:px-8">
-      <div className="bg-[#111111] px-5 py-8 text-white sm:px-8 lg:px-10">
-      <div data-aos="fade-up" data-aos-duration="800">
+      <div className="section-shell-dark px-5 py-7 sm:px-8 sm:py-9 lg:px-10 lg:py-10">
+      <div className="border-b border-white/12 pb-7" data-aos="fade-up" data-aos-duration="800">
         <p className="mb-3 text-xs font-semibold uppercase text-white/55">Limited markdown</p>
-        <h2 className="text-[34px] font-black uppercase leading-[0.9] text-white sm:text-[56px]">
+        <h2 className="text-[34px] font-semibold uppercase leading-[0.95] text-white sm:text-[52px]">
           Biggest Sales Ever
         </h2>
       </div>
@@ -112,10 +112,10 @@ export default function BiggestSales({ womenProducts = [], menProducts = [] }) {
               key={tab.key}
               type="button"
               onClick={() => setActiveGender(tab.key)}
-              className={`motion-surface motion-press h-10 rounded-full border px-5 text-sm font-semibold ${
+              className={`motion-surface motion-press h-11 rounded-full border px-6 text-sm font-semibold ${
                 activeGender === tab.key
                   ? "border-white bg-white text-[#111111]"
-                  : "border-white/30 bg-transparent text-white hover:border-white"
+                  : "border-white/20 bg-white/8 text-white hover:border-white/55 hover:bg-white/12"
               }`}
             >
               {tab.label}
@@ -128,7 +128,7 @@ export default function BiggestSales({ womenProducts = [], menProducts = [] }) {
             type="button"
             onClick={() => scrollBy(-320)}
             aria-label="Previous sales"
-            className="motion-surface motion-press flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white hover:text-[#111111]"
+            className="motion-surface motion-press flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white hover:text-[#111111]"
           >
             <ChevronLeft size={18} />
           </button>
@@ -136,7 +136,7 @@ export default function BiggestSales({ womenProducts = [], menProducts = [] }) {
             type="button"
             onClick={() => scrollBy(320)}
             aria-label="Next sales"
-            className="motion-surface motion-press flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white hover:text-[#111111]"
+            className="motion-surface motion-press flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white hover:text-[#111111]"
           >
             <ChevronRight size={18} />
           </button>
@@ -157,7 +157,7 @@ export default function BiggestSales({ womenProducts = [], menProducts = [] }) {
             className={`motion-surface motion-press h-10 shrink-0 rounded-full border px-4 text-sm font-medium ${
               activeFilter === filter.key
                 ? "border-white bg-white text-[#111111]"
-                : "border-white/30 bg-transparent text-white hover:border-white"
+                : "border-white/20 bg-white/8 text-white hover:border-white/55 hover:bg-white/12"
             }`}
           >
             {filter.label}
@@ -166,11 +166,11 @@ export default function BiggestSales({ womenProducts = [], menProducts = [] }) {
       </div>
 
       {products.length === 0 ? (
-        <p className="mt-6 text-sm text-[#707072]">Khong co san pham giam gia trong khoang gia nay.</p>
+        <p className="mt-6 text-sm text-white/55">Khong co san pham giam gia trong khoang gia nay.</p>
       ) : (
         <div
           ref={scrollerRef}
-          className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] sm:gap-5 [&::-webkit-scrollbar]:hidden"
         >
           {products.map((product, idx) => (
             <SaleCard key={product._id} product={product} revealDelay={(idx % 4) * 100} />

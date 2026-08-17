@@ -61,10 +61,10 @@ export default function VariantSelector({ product }) {
             <button
               key={size}
               onClick={() => handleSizeChange(size)}
-              className={`h-10 min-w-10 rounded-lg border px-3 text-sm font-medium ${
+              className={`h-11 min-w-11 rounded-full border px-4 text-sm font-semibold ${
                 selectedSize === size
                   ? "border-black bg-black text-white"
-                  : "border-neutral-300 hover:border-black"
+                  : "border-[#111111]/15 hover:border-black"
               }`}
             >
               {size}
@@ -80,10 +80,10 @@ export default function VariantSelector({ product }) {
             <button
               key={v._id}
               onClick={() => setSelectedColor(v.color)}
-              className={`rounded-lg border px-3 py-2 text-sm font-medium ${
+              className={`rounded-full border px-4 py-2.5 text-sm font-semibold ${
                 selectedColor === v.color
                   ? "border-black bg-black text-white"
-                  : "border-neutral-300 hover:border-black"
+                  : "border-[#111111]/15 hover:border-black"
               }`}
             >
               {v.color}
@@ -94,7 +94,7 @@ export default function VariantSelector({ product }) {
 
       <div className="flex items-center gap-3">
         <p className="text-sm font-medium">Số lượng</p>
-        <div className="flex items-center rounded-lg border border-neutral-300">
+        <div className="flex items-center rounded-full border border-[#111111]/15">
           <button
             className="h-9 w-9 text-lg"
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
@@ -119,7 +119,7 @@ export default function VariantSelector({ product }) {
       <button
         onClick={handleAddToCart}
         disabled={outOfStock || submitting}
-        className="w-full rounded-full bg-black py-3 text-sm font-semibold text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-300"
+        className="motion-surface motion-press w-full rounded-full bg-black py-3.5 text-sm font-semibold text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-300"
       >
         {outOfStock ? "Hết hàng" : submitting ? "Đang thêm..." : "Thêm vào giỏ hàng"}
       </button>

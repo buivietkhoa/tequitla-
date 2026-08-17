@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getFeaturedProducts, getNewestProducts, getOnSaleProducts, getCategories } from "@/lib/api-server";
 import HeroCarousel from "@/components/home/HeroCarousel";
+import FashionExperience from "@/components/home/FashionExperience";
 import TrendingSection from "@/components/home/TrendingSection";
 import TodaysDrops from "@/components/home/TodaysDrops";
 import BiggestSales from "@/components/home/BiggestSales";
@@ -25,7 +26,7 @@ export default async function HomePage() {
   ]);
 
   return (
-    <div className="bg-[#f3f0ea] pb-20 pt-6">
+    <div className="bg-white pb-20 pt-6">
       <section className="mx-auto max-w-[1700px] px-5 sm:px-8">
         <HeroCarousel />
       </section>
@@ -49,6 +50,7 @@ export default async function HomePage() {
         </section>
       )}
 
+      <FashionExperience />
       <TrendingSection womenProducts={womenProducts} menProducts={menProducts} />
       <TodaysDrops womenProducts={newestWomen} menProducts={newestMen} />
       <BiggestSales womenProducts={saleWomen} menProducts={saleMen} />

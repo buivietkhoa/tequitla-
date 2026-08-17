@@ -50,7 +50,7 @@ export default function HeroCarousel() {
   }, [goNext]);
 
   return (
-    <div className="relative mx-auto h-[500px] w-full overflow-hidden rounded-[18px] bg-[#111111] sm:h-[570px] lg:h-[620px]">
+    <div className="relative mx-auto h-[480px] w-full overflow-hidden rounded-lg bg-[#111111] sm:h-[560px] lg:h-[600px]">
       {SLIDES.map((item, slideIndex) => (
         <div
           key={item.image}
@@ -69,9 +69,9 @@ export default function HeroCarousel() {
         </div>
       ))}
 
-      <div className="absolute inset-0 bg-gradient-to-r from-black/82 via-black/35 to-black/5" />
-      <div className="absolute left-5 top-5 hidden h-[calc(100%-40px)] w-px bg-white/25 sm:block lg:left-7 lg:top-7 lg:h-[calc(100%-56px)]" />
-      <div className="absolute right-5 top-5 hidden h-[calc(100%-40px)] w-px bg-white/15 lg:right-7 lg:top-7 lg:block lg:h-[calc(100%-56px)]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/74 via-black/30 to-black/0" />
+      <div className="absolute left-5 top-5 hidden h-[calc(100%-40px)] w-px bg-white/18 sm:block lg:left-7 lg:top-7 lg:h-[calc(100%-56px)]" />
+      <div className="absolute right-5 top-5 hidden h-[calc(100%-40px)] w-px bg-white/10 lg:right-7 lg:top-7 lg:block lg:h-[calc(100%-56px)]" />
       <p className="absolute right-10 top-10 hidden origin-top-right rotate-90 text-xs font-semibold uppercase text-white/70 lg:block">
         Fashion archive / 2026
       </p>
@@ -83,14 +83,16 @@ export default function HeroCarousel() {
         data-aos-delay="200"
         data-aos-duration="1000"
       >
-        <p className="mb-4 inline-flex w-fit items-center gap-2 border border-white/40 px-3 py-1 text-xs font-semibold uppercase text-white">
+        <p className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-white/25 bg-white/12 px-3 py-1 text-xs font-semibold uppercase text-white shadow-[0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping-soft absolute inline-flex h-full w-full rounded-full bg-white" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
           </span>
-          {SLIDES[index].eyebrow}
+          <span className="animate-live-blink">LIVE</span>
+          <span className="h-3 w-px bg-white/30" />
+          <span className="normal-case text-white/82">Dang co 328 nguoi xem</span>
         </p>
-        <h1 className="max-w-[720px] text-[44px] font-black uppercase leading-[0.88] text-white sm:text-[68px] lg:text-[96px]">
+        <h1 className="max-w-[720px] text-[44px] font-semibold uppercase leading-[0.92] text-white sm:text-[68px] lg:text-[92px]">
           {SLIDES[index].title}
         </h1>
         <p className="mt-5 max-w-md text-base font-medium leading-6 text-white sm:text-lg">
@@ -110,12 +112,30 @@ export default function HeroCarousel() {
       </div>
 
       <div
-        className="absolute bottom-7 left-8 hidden max-w-[260px] border border-white/25 bg-black/20 p-4 text-xs font-medium uppercase leading-5 text-white/75 backdrop-blur sm:block lg:left-20"
+        className="absolute bottom-7 left-8 hidden w-[310px] rounded-lg border border-white/18 bg-black/30 p-4 text-white shadow-[0_24px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:block lg:left-20"
         data-aos="fade-right"
         data-aos-delay="300"
         data-aos-duration="800"
       >
-        Curated silhouettes, strong crops, clean daily pieces.
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/58">
+              Style dispatch
+            </p>
+            <p className="mt-1 text-sm font-semibold text-white">Don #SM328 dang dong goi</p>
+          </div>
+          <span className="rounded-full bg-white px-2.5 py-1 text-[11px] font-semibold text-[#111111]">
+            24h
+          </span>
+        </div>
+        <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/18">
+          <div className="animate-live-progress h-full rounded-full bg-white" />
+        </div>
+        <div className="mt-3 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.08em] text-white/62">
+          <span>Picked</span>
+          <span>Quality check</span>
+          <span>Ship</span>
+        </div>
       </div>
 
       <div

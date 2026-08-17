@@ -20,8 +20,6 @@ export async function generateMetadata({ params }) {
   const image = product.images?.[0];
 
   return {
-    // A custom SEO title from the admin is meant to be the full <title> text;
-    // `absolute` skips the root layout's "%s | SHMILY" template so it isn't appended twice.
     title: product.seo?.metaTitle ? { absolute: title } : title,
     description,
     alternates: { canonical: `/san-pham/${product.slug}` },
@@ -76,13 +74,13 @@ export default async function ProductDetailPage({ params }) {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-[1700px] px-5 py-10 sm:px-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
       />
 
-      <nav className="mb-4 text-xs text-neutral-500">
+      <nav className="mb-6 text-xs font-semibold uppercase text-[#707072]">
         <Link href="/">Trang chủ</Link> /{" "}
         <Link href={`/${product.gender}`}>{product.gender === "nam" ? "Nam" : "Nữ"}</Link>
         {product.category?.name && (
@@ -93,19 +91,26 @@ export default async function ProductDetailPage({ params }) {
         )}
       </nav>
 
-      <div className="grid gap-10 lg:grid-cols-2">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)] xl:gap-16">
         <ProductGallery images={product.images} name={product.name} product={product} />
 
-        <div>
-          <h1 className="text-2xl font-bold">{product.name}</h1>
-          {product.brand && <p className="mt-1 text-sm text-neutral-500">Thương hiệu: {product.brand}</p>}
+        <div className="lg:sticky lg:top-24 lg:h-fit">
+          <p className="mb-3 text-xs font-semibold uppercase text-[#707072]">
+            {product.brand || "SHMILY selection"}
+          </p>
+          <h1 className="text-[34px] font-semibold uppercase leading-none text-[#111111] sm:text-[52px]">
+            {product.name}
+          </h1>
+          {product.brand && <p className="mt-3 text-sm text-neutral-500">Brand: {product.brand}</p>}
 
-          <div className="mt-4 flex items-center gap-3">
-            <span className="text-2xl font-bold">{formatCurrency(price)}</span>
+          <div className="mt-5 flex items-center gap-3">
+            <span className={`text-2xl font-semibold ${discount > 0 ? "text-[#d30005]" : "text-[#111111]"}`}>
+              {formatCurrency(price)}
+            </span>
             {discount > 0 && (
               <>
                 <span className="text-neutral-400 line-through">{formatCurrency(product.price)}</span>
-                <span className="rounded-full bg-red-100 px-2 py-1 text-xs font-semibold text-red-600">
+                <span className="rounded-full bg-[#f7f7f7] px-3 py-1 text-xs font-semibold text-[#d30005]">
                   -{discount}%
                 </span>
               </>
@@ -113,23 +118,23 @@ export default async function ProductDetailPage({ params }) {
           </div>
 
           {product.numReviews > 0 && (
-            <p className="mt-1 text-sm text-neutral-500">
+            <p className="mt-2 text-sm text-neutral-500">
               {"★".repeat(Math.round(product.rating))} ({product.numReviews} đánh giá)
             </p>
           )}
 
-          <p className="mt-4 text-sm leading-relaxed text-neutral-600">
+          <p className="mt-5 max-w-xl text-sm leading-6 text-neutral-600">
             {product.shortDescription || product.description}
           </p>
 
-          <div className="mt-6">
+          <div className="mt-7">
             <VariantSelector product={product} />
           </div>
 
           {product.description && (
             <div className="mt-8 border-t border-neutral-200 pt-6">
-              <h2 className="text-sm font-semibold">Mô tả sản phẩm</h2>
-              <p className="mt-2 whitespace-pre-line text-sm text-neutral-600">
+              <h2 className="text-sm font-semibold uppercase">Mô tả sản phẩm</h2>
+              <p className="mt-3 whitespace-pre-line text-sm leading-6 text-neutral-600">
                 {product.description}
               </p>
             </div>
@@ -145,9 +150,9 @@ export default async function ProductDetailPage({ params }) {
       />
 
       {related?.length > 0 && (
-        <section className="mt-12 border-t border-neutral-200 pt-8">
-          <h2 className="mb-4 text-lg font-semibold">Sản phẩm liên quan</h2>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        <section className="mt-14 border-t border-neutral-200 pt-8">
+          <h2 className="mb-6 text-[28px] font-semibold uppercase leading-none text-[#111111]">Sản phẩm liên quan</h2>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-4 xl:grid-cols-5">
             {related.map((p) => (
               <ProductCard key={p._id} product={p} />
             ))}

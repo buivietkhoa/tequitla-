@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BadgePercent,
   ChevronDown,
@@ -348,7 +348,15 @@ export default function Header() {
   const [query, setQuery] = useState("");
   const [scope, setScope] = useState("nu");
   const [scopeOpen, setScopeOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const scopeLabel = scope === "nu" ? "Women" : "Men";
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 12);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   function handleSearch(e) {
     e.preventDefault();
@@ -358,7 +366,13 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[#111111] bg-white/95 backdrop-blur-xl">
+    <header
+      className={`sticky top-0 z-40 border-b border-[#111111] transition-[background-color,box-shadow,backdrop-filter] duration-300 ${
+        scrolled
+          ? "bg-white/82 shadow-[0_12px_34px_rgba(17,17,17,0.08)] backdrop-blur-2xl"
+          : "bg-white/95 shadow-none backdrop-blur-xl"
+      }`}
+    >
       <div className="relative mx-auto flex h-16 w-full max-w-[1700px] items-center justify-between px-5 sm:px-8">
         <div className="flex min-w-0 items-center justify-self-start gap-4">
           <button
@@ -596,12 +610,12 @@ export default function Header() {
       </div>
 
       {menuOpen && (
-        <nav className="flex flex-col gap-1 border-t border-neutral-200 px-4 py-3 md:hidden">
+        <nav className="section-shell mx-4 mb-4 flex flex-col gap-1 border-t border-neutral-200 px-4 py-4 md:hidden">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="py-2 text-xs font-bold tracking-wide"
+              className="rounded-lg px-3 py-3 text-sm font-semibold uppercase tracking-wide hover:bg-[#f7f7f7]"
               onClick={() => setMenuOpen(false)}
             >
               {link.label}
@@ -609,7 +623,7 @@ export default function Header() {
           ))}
           <form
             onSubmit={handleSearch}
-            className="mt-2 flex items-center gap-2 rounded-full border border-[#c99b74] px-3 py-1.5"
+            className="mt-3 flex h-11 items-center gap-2 rounded-lg border border-[#c99b74] px-3"
           >
             <Search size={15} className="text-neutral-500" />
             <input
@@ -622,7 +636,7 @@ export default function Header() {
           </form>
           <Link
             href="/gio-hang"
-            className="flex items-center gap-2 py-2 text-xs font-bold tracking-wide"
+            className="mt-2 flex items-center gap-2 rounded-lg px-3 py-3 text-sm font-semibold uppercase tracking-wide hover:bg-[#f7f7f7]"
             onClick={() => setMenuOpen(false)}
           >
             <ShoppingBag size={16} strokeWidth={1.6} />

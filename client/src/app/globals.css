@@ -145,6 +145,94 @@ body {
   transform: scale(0.95);
 }
 
+.section-shell {
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 1px 0 rgba(17, 17, 17, 0.04);
+  backdrop-filter: blur(12px);
+}
+
+.section-shell-dark {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: #111111;
+  color: #ffffff;
+}
+
+.fashion-chip {
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 600;
+  height: 44px;
+  padding: 0 24px;
+  transition: background-color 360ms var(--motion-standard), border-color 360ms var(--motion-standard), color 360ms var(--motion-standard), transform 180ms ease-out;
+}
+
+.fashion-chip:active {
+  transform: scale(0.96);
+}
+
+.fashion-chip-active {
+  background: #111111;
+  border-color: #111111;
+  color: #ffffff;
+}
+
+.fashion-chip-idle {
+  background: #f7f7f7;
+  color: #111111;
+}
+
+.fashion-chip-idle:hover {
+  background: #ffffff;
+  border-color: rgba(17, 17, 17, 0.35);
+}
+
+.fashion-arrow {
+  align-items: center;
+  background: #f7f7f7;
+  border-radius: 9999px;
+  color: #111111;
+  display: inline-flex;
+  height: 44px;
+  justify-content: center;
+  transition: background-color 360ms var(--motion-standard), color 360ms var(--motion-standard), transform 180ms ease-out;
+  width: 44px;
+}
+
+.fashion-arrow:hover {
+  background: #111111;
+  color: #ffffff;
+}
+
+.fashion-arrow:active {
+  transform: scale(0.94);
+}
+
+.commerce-card {
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.field-soft {
+  border: 1px solid rgba(17, 17, 17, 0.14);
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111111;
+  outline: none;
+  transition: border-color 240ms ease-out, box-shadow 240ms ease-out;
+}
+
+.field-soft:focus {
+  border-color: #111111;
+  box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.06);
+}
+
 .animate-editorial-rise {
   animation: editorial-rise 680ms var(--motion-soft) both;
   will-change: opacity, transform;
@@ -221,12 +309,72 @@ body {
   animation: ping-soft 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
+@keyframes live-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.42;
+  }
+}
+
+.animate-live-blink {
+  animation: live-blink 1.15s ease-in-out infinite;
+}
+
+@keyframes live-progress {
+  0% {
+    transform: translateX(-68%) scaleX(0.5);
+  }
+
+  54% {
+    transform: translateX(0%) scaleX(1);
+  }
+
+  100% {
+    transform: translateX(120%) scaleX(0.72);
+  }
+}
+
+.animate-live-progress {
+  animation: live-progress 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  transform-origin: left center;
+  width: 72%;
+}
+
+@keyframes suggestion-slide {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+
+  18%,
+  78% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+.animate-suggestion-slide {
+  animation: suggestion-slide 2.1s var(--motion-soft) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-fade-up-delay,
   .animate-banner-image,
   .animate-editorial-rise,
-  .animate-ping-soft {
+  .animate-ping-soft,
+  .animate-live-blink,
+  .animate-live-progress,
+  .animate-suggestion-slide {
     animation: none;
   }
 

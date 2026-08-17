@@ -32,10 +32,11 @@ export default function ProductFilters({ categories = [], gender }) {
   const currentSize = searchParams.get("size") || "";
 
   return (
-    <div className="flex flex-wrap items-center gap-3 border-b border-neutral-200 py-4">
+    <div className="mt-8 flex flex-wrap items-center gap-3 border-y border-[#111111]/10 py-4">
+      <span className="mr-1 text-xs font-semibold uppercase text-[#707072]">Bộ lọc</span>
       {categories.length > 0 && (
         <select
-          className="rounded-full border border-neutral-300 px-3 py-1.5 text-sm"
+          className="h-11 w-full rounded-full border border-[#111111]/15 bg-white px-4 text-sm font-semibold outline-none hover:border-[#111111]/35 sm:w-auto"
           onChange={(e) => router.push(e.target.value)}
           defaultValue=""
         >
@@ -51,7 +52,7 @@ export default function ProductFilters({ categories = [], gender }) {
       <select
         value={currentSize}
         onChange={(e) => updateParam("size", e.target.value)}
-        className="rounded-full border border-neutral-300 px-3 py-1.5 text-sm"
+        className="h-11 w-full rounded-full border border-[#111111]/15 bg-white px-4 text-sm font-semibold outline-none hover:border-[#111111]/35 sm:w-auto"
       >
         <option value="">Tất cả size</option>
         {SIZES.map((s) => (
@@ -64,7 +65,7 @@ export default function ProductFilters({ categories = [], gender }) {
       <select
         value={currentSort}
         onChange={(e) => updateParam("sort", e.target.value)}
-        className="ml-auto rounded-full border border-neutral-300 px-3 py-1.5 text-sm"
+        className="h-11 w-full rounded-full border border-[#111111]/15 bg-white px-4 text-sm font-semibold outline-none hover:border-[#111111]/35 sm:ml-auto sm:w-auto"
       >
         {SORT_OPTIONS.map((opt) => (
           <option key={opt.value} value={opt.value}>

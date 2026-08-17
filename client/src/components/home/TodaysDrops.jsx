@@ -33,12 +33,12 @@ function DropCard({ product, revealDelay = 0 }) {
   return (
     <Link
       href={`/san-pham/${product.slug}`}
-      className="group block w-[66vw] shrink-0 snap-start bg-white p-2 sm:w-[250px] lg:w-[292px]"
+      className="group block w-[66vw] shrink-0 snap-start sm:w-[250px] lg:w-[292px]"
       data-aos="fade-up"
       data-aos-delay={String(revealDelay)}
       data-aos-duration="800"
     >
-      <div className="product-hover-shell relative aspect-[4/5] w-full overflow-hidden bg-[#f5f5f5]">
+      <div className="product-hover-shell relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-[#f5f5f5]">
         <Image
           src={imageSrc}
           alt={product.name}
@@ -52,11 +52,13 @@ function DropCard({ product, revealDelay = 0 }) {
           Xem nhanh
         </span>
       </div>
-      <div className="px-2 pb-2 pt-4 text-left text-sm text-[#111111]">
-        {product.brand && <p className="truncate font-semibold">{product.brand}</p>}
-        <p className="truncate text-[#707072]">{product.name}</p>
+      <div className="px-1 pb-2 pt-4 text-left text-sm text-[#111111]">
+        {product.brand && <p className="truncate text-xs font-semibold uppercase text-[#707072]">{product.brand}</p>}
+        <p className="mt-1 truncate text-[15px] font-semibold text-[#111111]">{product.name}</p>
         <div className="mt-2 flex flex-wrap items-center gap-2">
-          <span className="font-semibold">{formatCurrency(price)}</span>
+          <span className={`font-semibold ${discount > 0 ? "text-[#d30005]" : "text-[#111111]"}`}>
+            {formatCurrency(price)}
+          </span>
           {discount > 0 && (
             <>
               <span className="text-xs text-[#707072] line-through">
@@ -96,10 +98,10 @@ export default function TodaysDrops({ womenProducts = [], menProducts = [] }) {
 
   return (
     <section className="mx-auto mt-14 max-w-[1700px] px-5 sm:px-8">
-      <div className="border-y border-[#111111]/10 py-8">
-      <div data-aos="fade-up" data-aos-duration="800">
+      <div className="section-shell px-5 py-7 sm:px-8 sm:py-9 lg:px-10 lg:py-10">
+      <div className="border-b border-[#111111]/10 pb-7" data-aos="fade-up" data-aos-duration="800">
         <p className="mb-3 text-xs font-semibold uppercase text-[#707072]">Fresh arrivals</p>
-        <h2 className="text-[34px] font-black uppercase leading-[0.9] text-[#111111] sm:text-[56px]">
+        <h2 className="text-[34px] font-semibold uppercase leading-[0.95] text-[#111111] sm:text-[52px]">
           Today&apos;s Drops
         </h2>
       </div>
@@ -116,10 +118,10 @@ export default function TodaysDrops({ womenProducts = [], menProducts = [] }) {
               key={tab.key}
               type="button"
               onClick={() => setActiveGender(tab.key)}
-              className={`motion-surface motion-press h-10 rounded-full border px-5 text-sm font-semibold ${
+              className={`fashion-chip ${
                 activeGender === tab.key
-                  ? "border-[#111111] bg-[#111111] text-white"
-                  : "border-[#cacacb] bg-white text-[#111111] hover:border-[#111111]"
+                  ? "fashion-chip-active"
+                  : "fashion-chip-idle"
               }`}
             >
               {tab.label}
@@ -132,7 +134,7 @@ export default function TodaysDrops({ womenProducts = [], menProducts = [] }) {
             type="button"
             onClick={() => scrollBy(-320)}
             aria-label="Previous drops"
-            className="motion-surface motion-press flex h-10 w-10 items-center justify-center rounded-full bg-[#f5f5f5] text-[#111111] hover:bg-[#e5e5e5]"
+            className="fashion-arrow"
           >
             <ChevronLeft size={18} />
           </button>
@@ -140,7 +142,7 @@ export default function TodaysDrops({ womenProducts = [], menProducts = [] }) {
             type="button"
             onClick={() => scrollBy(320)}
             aria-label="Next drops"
-            className="motion-surface motion-press flex h-10 w-10 items-center justify-center rounded-full bg-[#f5f5f5] text-[#111111] hover:bg-[#e5e5e5]"
+            className="fashion-arrow"
           >
             <ChevronRight size={18} />
           </button>
@@ -158,10 +160,10 @@ export default function TodaysDrops({ womenProducts = [], menProducts = [] }) {
             key={filter.key}
             type="button"
             onClick={() => setActiveFilter(filter.key)}
-            className={`motion-surface motion-press h-10 shrink-0 rounded-full border px-4 text-sm font-medium ${
+            className={`fashion-chip h-10 px-4 text-sm font-medium ${
               activeFilter === filter.key
-                ? "border-[#111111] bg-[#111111] text-white"
-                : "border-[#cacacb] bg-white text-[#111111] hover:border-[#111111]"
+                ? "fashion-chip-active"
+                : "fashion-chip-idle"
             }`}
           >
             {filter.label}
@@ -174,7 +176,7 @@ export default function TodaysDrops({ womenProducts = [], menProducts = [] }) {
       ) : (
         <div
           ref={scrollerRef}
-          className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] sm:gap-5 [&::-webkit-scrollbar]:hidden"
         >
           {products.map((product, idx) => (
             <DropCard key={product._id} product={product} revealDelay={(idx % 4) * 100} />
