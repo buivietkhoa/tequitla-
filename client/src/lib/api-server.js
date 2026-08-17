@@ -15,17 +15,23 @@ function buildQuery(params = {}) {
 // Product/category data changes rarely enough that a short revalidate window keeps
 // pages fast (served from cache) while still staying reasonably fresh.
 const DEFAULT_REVALIDATE = 300;
+const FETCH_TIMEOUT_MS = 4500;
 
 // The API may be temporarily unreachable (backend down, build running without a DB).
 // Returning null instead of throwing keeps pages rendering with empty/fallback data
 // rather than crashing the whole route.
 async function safeFetch(url, options) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
   try {
-    const res = await fetch(url, options);
+    const res = await fetch(url, { ...options, signal: controller.signal });
     if (!res.ok) return null;
     return await res.json();
   } catch {
     return null;
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
